@@ -1,4 +1,4 @@
-2/71
+4/71
 
 - [x] FGFDMExec (FGPropertyManager *root=nullptr, std::shared_ptr< unsigned int > fdmctr=nullptr)
 - [ ] ~FGFDMExec ()
@@ -15,7 +15,7 @@
 - [ ] const SGPath & 	GetAircraftPath (void)
 - [ ] auto 	GetChildFDM (int i) const
 - [ ] int 	GetDebugLevel (void) const
-- [ ] double 	GetDeltaT (void) const
+- [x] double 	GetDeltaT (void) const
 - [ ] const SGPath & 	GetEnginePath (void)
 - [ ] size_t 	GetFDMCount (void) const
 - [ ] unsigned int 	GetFrame (void) const
@@ -63,7 +63,7 @@
 - [ ] bool 	SetOutputFileName (const int n, const std::string &fname)
 - [ ] bool 	SetOutputPath (const SGPath &path)
 - [ ] void 	SetPropertyValue (const std::string &property, double value)
-- [ x] void 	SetRootDir (const SGPath &rootDir)
+- [x] void 	SetRootDir (const SGPath &rootDir)
 - [ ] double 	Setsim_time (double cur_time)
 - [ ] bool 	SetSystemsPath (const SGPath &path)
 - [ ] void 	SetTrimMode (int mode)

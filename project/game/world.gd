@@ -5,6 +5,7 @@ extends Node
 func _ready() -> void:
 	$JSBSim.SetRootDir(ProjectSettings.globalize_path("res://JSBSim_files/"))
 	print($JSBSim.GetRootDir())
+	print($JSBSim.GetDeltaT())
 	pass # Replace with function body.
 
 
