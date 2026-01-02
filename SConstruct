@@ -63,4 +63,19 @@ copied_jsbsim = env.Install(jsbsim_destination, jsbsim_source)
 
 Default(copied_jsbsim)
 
+src2 = [
+    "jsbsim/aircraft",
+    "jsbsim/engine",
+    "jsbsim/systems"
+]
+
+dest = "project/JSBSim_files"
+
+install_targets = []
+
+for src_dir in src2:
+    tgt = env.Install(dest, src_dir)
+    install_targets.extend(tgt)
+
+Default(install_targets)
 Default(library)

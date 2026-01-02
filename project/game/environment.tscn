@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2xuherrowsss"]
+
+[sub_resource type="Environment" id="Environment_b8cjj"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_c8via"]
+
+[sub_resource type="Compositor" id="Compositor_4tw6t"]
+
+[node name="Environment" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_b8cjj")
+camera_attributes = SubResource("CameraAttributesPractical_c8via")
+compositor = SubResource("Compositor_4tw6t")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
