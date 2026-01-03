@@ -1,3 +1,5 @@
+Loading an init conditions file is supported. std::shared_ptr< FGInitialCondition > 	GetIC (void) const
+
 - [x] FGFDMExec (FGPropertyManager *root=nullptr, std::shared_ptr< unsigned int > fdmctr=nullptr)
 - [ ] ~FGFDMExec ()
 - [ ] void 	AddTemplateFunc (const std::string &name, Element *el)
@@ -38,8 +40,9 @@
 - [ ] double 	IncrTime (void)
 - [ ] void 	Initialize (const FGInitialCondition *FGIC)
 - [ ] bool 	IntegrationSuspended (void) const
-- [ ] bool 	LoadModel (const SGPath &AircraftPath, const SGPath &EnginePath, const SGPath &SystemsPath, const std::string &model, bool addModelToPath=true)
-- [ ] bool 	LoadModel (const std::string &model, bool addModelToPath=true)
+~~ - [ ] bool 	LoadModel (const SGPath &AircraftPath, const SGPath &EnginePath, const SGPath &SystemsPath, const std::string &model, bool addModelToPath=true) ~~
+  - This function will not be supported. As I do not want to muddle the origional api any more than needed with hand rolled GDScript overloading. Just load all the paths manually. 
+- [x] bool 	LoadModel (const std::string &model, bool addModelToPath=true)
 - [ ] bool 	LoadPlanet (const SGPath &PlanetPath, bool useAircraftPath=true)
 - [ ] bool 	LoadScript (const SGPath &Script, double deltaT=0.0, const SGPath &initfile=SGPath())
 - [ ] void 	PrintPropertyCatalog (void)

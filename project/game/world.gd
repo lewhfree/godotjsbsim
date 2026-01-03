@@ -11,9 +11,11 @@ func _ready() -> void:
 	print($JSBSim.GetAircraftPath())
 	$JSBSim.SetEnginePath(ProjectSettings.globalize_path("res://JSBSim_files/engine/"))
 	print($JSBSim.GetEnginePath())
-	#$JSBSim.Setdt(1.0/60.0)
+	$JSBSim.Setdt(1.0/60.0)
 	print($JSBSim.GetDeltaT())
 	print($JSBSim.SRand())
+	print($JSBSim.LoadModel("c172p", true))
+	print($JSBSim.LoadInitFile("reset00", true))
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

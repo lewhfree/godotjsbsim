@@ -41,8 +41,10 @@ public:
     String GetEnginePath(void);
 
     int SRand(void);
-};
 
+    bool LoadModel(const String &model, bool addModelToPath);
+
+    bool LoadInitFile(const String &path, bool isRelativeToAircraftPath);
+    };
 }
-
 #endif // GODOT_JSBSIM_H

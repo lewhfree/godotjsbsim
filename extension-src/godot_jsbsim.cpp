@@ -3,6 +3,8 @@
 
 #include <FGFDMExec.h>
 #include <simgear/misc/sg_path.hxx>
+#include <initialization/FGInitialCondition.h>
+
 
 using namespace godot;
 
@@ -26,10 +28,13 @@ void GodotJSBSim::_bind_methods() {
     ClassDB::bind_method(D_METHOD("SetEnginePath", "path"), &GodotJSBSim::SetEnginePath);
     ClassDB::bind_method(D_METHOD("GetEnginePath"), &GodotJSBSim::GetEnginePath);
     ClassDB::bind_method(D_METHOD("SRand"), &GodotJSBSim::SRand);
+    ClassDB::bind_method(D_METHOD("LoadModel", "model", "addModelToPath"), &GodotJSBSim::LoadModel);
+    ClassDB::bind_method(D_METHOD("LoadInitFile", "path", "isRelativeToAircraft"), &GodotJSBSim::LoadInitFile);
 }
 
 void GodotJSBSim::_ready() {
     fdmex = new JSBSim::FGFDMExec();
+    fdmex->SetDebugLevel(0);
 }
 
 void GodotJSBSim::_physics_process(double delta) {
@@ -82,4 +87,13 @@ String GodotJSBSim::GetEnginePath(void) {
 
 int GodotJSBSim::SRand(void) {
     return fdmex->SRand();
+}
+
+bool GodotJSBSim::LoadModel(const String &model, bool addModelToPath){
+    const std::string model_real = std::string(model.utf8().get_data());
+    return fdmex->LoadModel(model_real, addModelToPath);
+}
+
+bool GodotJSBSim::LoadInitFile(const String &path, bool isRelativeToAircraftPath) {
+return fdmex->GetIC()->Load(SGPath(path.utf8().get_data()), isRelativeToAircraftPath);
 }

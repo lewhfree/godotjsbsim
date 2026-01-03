@@ -32,6 +32,13 @@ if scons_cache_path != None:
 
 # Create the library target (e.g. libexample.linux.debug.x86_64.so).
 debug_or_release = "release" if env["target"] == "template_release" else "debug"
+
+if debug_or_release == "debug":
+    env.Append(CXXFLAGS=["-g", "-O0"])
+else:
+    env.Append(CXXFLAGS=["-O2"])
+
+
 if env["platform"] == "macos":
     library = env.SharedLibrary(
         "{0}/bin/lib{1}.{2}.{3}.framework/{1}.{2}.{3}".format(
@@ -66,7 +73,8 @@ Default(copied_jsbsim)
 src2 = [
     "jsbsim/aircraft",
     "jsbsim/engine",
-    "jsbsim/systems"
+    "jsbsim/systems",
+    "jsbsim/scripts"
 ]
 
 dest = "project/JSBSim_files"

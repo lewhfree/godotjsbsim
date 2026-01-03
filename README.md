@@ -31,7 +31,8 @@
 
 ## Notes
 
-To see what JSBSim::FGFDMExec methods have an equivilant, and notes for important ones (like loadmodel()), see [the methods_todo file](extension-src/methods_todo.md)
+To see what JSBSim::FGFDMExec methods have an equivilant, and notes for important ones (like loadmodel()), see [the methods_todo file](extension-src/methods_todo.md) </br>
+I will be trying to match the GDscript api as closely to the native c++ JSBSim api as possible, but at some point, I will stop. 
 
 ## Thanks/Licences
 
