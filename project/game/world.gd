@@ -4,26 +4,30 @@ extends Node
 @onready var LabelNode: Label = $Label
 
 func _ready() -> void:
+	#must be setup for relative paths
 	JSBSim.SetRootDir(ProjectSettings.globalize_path("res://JSBSim_files/"))
-	print(JSBSim.GetRootDir())
+	#must be setup to load airplanes
 	JSBSim.SetAircraftPath(ProjectSettings.globalize_path("res://JSBSim_files/aircraft/"))
-	print(JSBSim.GetAircraftPath())
+	#ditto for systems
 	JSBSim.SetSystemsPath(ProjectSettings.globalize_path("res://JSBSim_files/systems/"))
-	print(JSBSim.GetAircraftPath())
+	#ditto for engines
 	JSBSim.SetEnginePath(ProjectSettings.globalize_path("res://JSBSim_files/engine/"))
-	print(JSBSim.GetEnginePath())
+	#set the time step. Godot defaults to 60fps, but you can change it
 	JSBSim.Setdt(1.0/120.0)
-	print("DeltaT: ", JSBSim.GetDeltaT())
-	print("SRand: ", JSBSim.SRand())
-	print("Loaded model: ", JSBSim.LoadModel("c172p", true))
-	print("Load init file: ", JSBSim.LoadInitFile("reset01", true))
-	JSBSim.PrintPropertyCatalog()
-	print("RUNIC ", JSBSim.RunIC())
+	
+	#load example files. Starts the cessna 2000 ft in the air with 90 kts i think
+	JSBSim.LoadModel("c172p", true)
+	JSBSim.LoadInitFile("reset01", true)
+	
+	#Get sim setup after loaded init conditions
+	JSBSim.RunIC()
 
 func _physics_process(_delta: float) -> void:
+	#keep this function as minimal as possible. It should be able to run at stable 120hz
 	JSBSim.Run()
 
 func _process(delta: float):
+	#simple hud
 	LabelNode.text = "Height above sea level: " + str(JSBSim.GetPropertyValue("position/h-sl-ft"))
 	LabelNode.text += "\nPitch in radians: " + str(JSBSim.GetPropertyValue("attitude/theta-rad"))
 	LabelNode.text += "\nCalibrated Airspeed knots: " + str(JSBSim.GetPropertyValue("velocities/vc-kts"))
