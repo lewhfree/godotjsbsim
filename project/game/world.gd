@@ -5,9 +5,15 @@ extends Node
 func _ready() -> void:
 	$JSBSim.SetRootDir(ProjectSettings.globalize_path("res://JSBSim_files/"))
 	print($JSBSim.GetRootDir())
-	$JSBSim.Setdt(1.0/60.0)
+	$JSBSim.SetAircraftPath(ProjectSettings.globalize_path("res://JSBSim_files/aircraft/"))
+	print($JSBSim.GetAircraftPath())
+	$JSBSim.SetSystemsPath(ProjectSettings.globalize_path("res://JSBSim_files/systems/"))
+	print($JSBSim.GetAircraftPath())
+	$JSBSim.SetEnginePath(ProjectSettings.globalize_path("res://JSBSim_files/engine/"))
+	print($JSBSim.GetEnginePath())
+	#$JSBSim.Setdt(1.0/60.0)
 	print($JSBSim.GetDeltaT())
-
+	print($JSBSim.SRand())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:

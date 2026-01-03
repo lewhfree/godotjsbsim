@@ -27,8 +27,20 @@ public:
 
     void SetRootDir(const String &dir);
     String GetRootDir(void);
+
     double GetDeltaT(void);
     void Setdt(double delta_t);
+
+    bool SetAircraftPath(const String &path);
+    String GetAircraftPath(void);
+
+    bool SetSystemsPath(const String &path);
+    String GetSystemsPath(void);
+
+    bool SetEnginePath(const String &path);
+    String GetEnginePath(void);
+
+    int SRand(void);
 };
 
 }

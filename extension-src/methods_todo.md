@@ -1,5 +1,3 @@
-4/71
-
 - [x] FGFDMExec (FGPropertyManager *root=nullptr, std::shared_ptr< unsigned int > fdmctr=nullptr)
 - [ ] ~FGFDMExec ()
 - [ ] void 	AddTemplateFunc (const std::string &name, Element *el)
@@ -12,11 +10,11 @@
 - [ ] void 	EnableOutput (void)
 - [ ] std::vector< std::string > 	EnumerateFDMs (void)
 - [ ] void 	ForceOutput (int idx=0)
-- [ ] const SGPath & 	GetAircraftPath (void)
+- [x] const SGPath & 	GetAircraftPath (void)
 - [ ] auto 	GetChildFDM (int i) const
 - [ ] int 	GetDebugLevel (void) const
 - [x] double 	GetDeltaT (void) const
-- [ ] const SGPath & 	GetEnginePath (void)
+- [x] const SGPath & 	GetEnginePath (void)
 - [ ] size_t 	GetFDMCount (void) const
 - [ ] unsigned int 	GetFrame (void) const
 - [ ] const SGPath & 	GetFullAircraftPath (void)
@@ -31,7 +29,7 @@
 - [ ] auto 	GetRandomGenerator (void) const
 - [x] const SGPath & 	GetRootDir (void) const
 - [ ] double 	GetSimTime (void) const
-- [ ] const SGPath & 	GetSystemsPath (void)
+- [x] const SGPath & 	GetSystemsPath (void)
 - [ ] FGTemplateFunc_ptr 	GetTemplateFunc (const std::string &name)
 - [ ] int 	GetTrimMode (void) const
 - [ ] bool 	GetTrimStatus (void) const
@@ -52,11 +50,11 @@
 - [ ] void 	ResumeIntegration (void)
 - [ ] bool 	Run (void)
 - [ ] bool 	RunIC (void)
-- [ ] bool 	SetAircraftPath (const SGPath &path)
+- [x] bool 	SetAircraftPath (const SGPath &path)
 - [ ] void 	SetChild (bool ch)
 - [ ] void 	SetDebugLevel (int level)
 - [x] void 	Setdt (double delta_t)
-- [ ] bool 	SetEnginePath (const SGPath &path)
+- [x] bool 	SetEnginePath (const SGPath &path)
 - [ ] void 	SetHoldDown (bool hd)
 - [ ] void 	SetLoggingRate (double rate)
 - [ ] bool 	SetOutputDirectives (const SGPath &fname)
@@ -65,9 +63,9 @@
 - [ ] void 	SetPropertyValue (const std::string &property, double value)
 - [x] void 	SetRootDir (const SGPath &rootDir)
 - [ ] double 	Setsim_time (double cur_time)
-- [ ] bool 	SetSystemsPath (const SGPath &path)
+- [x] bool 	SetSystemsPath (const SGPath &path)
 - [ ] void 	SetTrimMode (int mode)
 - [ ] void 	SetTrimStatus (bool status)
-- [ ] int 	SRand (void) const
+- [x] int 	SRand (void) const
 - [ ] void 	SuspendIntegration (void)
 - [ ] void 	Unbind (void)
