@@ -5,10 +5,10 @@ extends Node
 func _ready() -> void:
 	$JSBSim.SetRootDir(ProjectSettings.globalize_path("res://JSBSim_files/"))
 	print($JSBSim.GetRootDir())
+	$JSBSim.Setdt(1.0/60.0)
 	print($JSBSim.GetDeltaT())
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass

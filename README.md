@@ -29,6 +29,10 @@
     godot --editor
 ```
 
+## Notes
+
+To see what JSBSim::FGFDMExec methods have an equivilant, and notes for important ones (like loadmodel()), see [the methods_todo file](extension-src/methods_todo.md)
+
 ## Thanks/Licences
 
 Thanks to [nathanfranke](https://github.com/nathanfranke) for the [gdextension](https://github.com/nathanfranke/gdextension) starter code licensed under the unlicense

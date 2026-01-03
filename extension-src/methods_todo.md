@@ -55,7 +55,7 @@
 - [ ] bool 	SetAircraftPath (const SGPath &path)
 - [ ] void 	SetChild (bool ch)
 - [ ] void 	SetDebugLevel (int level)
-- [ ] void 	Setdt (double delta_t)
+- [x] void 	Setdt (double delta_t)
 - [ ] bool 	SetEnginePath (const SGPath &path)
 - [ ] void 	SetHoldDown (bool hd)
 - [ ] void 	SetLoggingRate (double rate)

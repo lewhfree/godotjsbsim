@@ -18,6 +18,7 @@ void GodotJSBSim::_bind_methods() {
     ClassDB::bind_method(D_METHOD("SetRootDir", "rootDir"), &GodotJSBSim::SetRootDir);
     ClassDB::bind_method(D_METHOD("GetRootDir"), &GodotJSBSim::GetRootDir);
     ClassDB::bind_method(D_METHOD("GetDeltaT"), &GodotJSBSim::GetDeltaT);
+    ClassDB::bind_method(D_METHOD("Setdt", "delta_t"), &GodotJSBSim::Setdt);
 }
 
 void GodotJSBSim::_ready() {
@@ -39,4 +40,8 @@ String GodotJSBSim::GetRootDir(void) {
 
 double GodotJSBSim::GetDeltaT(void) {
     return fdmex->GetDeltaT();
+}
+
+void GodotJSBSim::Setdt(double delta_t) {
+    fdmex->Setdt(delta_t);
 }

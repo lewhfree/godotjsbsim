@@ -28,6 +28,7 @@ public:
     void SetRootDir(const String &dir);
     String GetRootDir(void);
     double GetDeltaT(void);
+    void Setdt(double delta_t);
 };
 
 }
