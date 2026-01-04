@@ -17,4 +17,12 @@ windows.release.x86_64 = "bin/libJSBSim.windows.release.x86_64.dll"
 macos.debug =            "bin/libJSBSim.macos.debug.framework"
 macos.release =          "bin/libJSBSim.macos.release.framework"
 android.debug.arm64 =    "bin/libJSBSim.android.debug.arm64.so"
-android.release.arm64 =  "bin/libJSBSim.android.release.arm64.so"
+android.release.arm64 =  "bin/libJSBSim.android.debug.arm64.so"
+
+[dependencies]
+android.arm64 = {
+    "res://addons/JSBSim/bin/libJSBSim.so" : ""
+}
+linux.x86_64 = {
+    "res://addons/JSBSim/bin/libJSBSim.so" : ""
+}

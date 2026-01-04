@@ -5,85 +5,50 @@ from pathlib import Path
 
 env = SConscript("godot-cpp/SConstruct")
 
-# Add source files.
-env.Append(CPPPATH=["extension-src/"])
-sources = Glob("extension-src/*.cpp")
-
-jsbsim_root = "jsbsim"
-jsbsim_build_dir = "jsbsim/build/src"
-
-env.Append(CPPPATH=[os.path.join(jsbsim_root, "src")])
-
-env.Append(LIBPATH=[jsbsim_build_dir])
-env.Append(LIBS=["JSBSim"])
-
-env.Append(LINKFLAGS=["-Wl,-rpath,'$$ORIGIN'"])
-
-(extension_path,) = glob("project/addons/*/*.gdextension")
-
-addon_path = Path(extension_path).parent
-
-project_name = Path(extension_path).stem
-
-scons_cache_path = os.environ.get("SCONS_CACHE")
-if scons_cache_path != None:
-    CacheDir(scons_cache_path)
-    print("Scons cache enabled... (path: '" + scons_cache_path + "')")
-
-# Create the library target (e.g. libexample.linux.debug.x86_64.so).
+platform = env["platform"]
+arch = env["arch"]        
 debug_or_release = "release" if env["target"] == "template_release" else "debug"
 
-if debug_or_release == "debug":
-    env.Append(CXXFLAGS=["-g", "-O0"])
-else:
-    env.Append(CXXFLAGS=["-O2"])
+ROOT = os.getcwd()
+JSBSIM_ROOT = os.path.join(ROOT, "jsbsim")
+JSBSIM_BUILD = os.path.join(JSBSIM_ROOT, "build", "src")
+JSBSIM_LIB = os.path.join(JSBSIM_BUILD, "libJSBSim.so")
 
+EXT_SRC = os.path.join(ROOT, "extension-src")
+EXTENSION_PATH = glob("project/addons/*/*.gdextension")[0]
+ADDON_PATH = Path(EXTENSION_PATH).parent
+PROJECT_NAME = Path(EXTENSION_PATH).stem
 
-if env["platform"] == "macos":
-    library = env.SharedLibrary(
-        "{0}/bin/lib{1}.{2}.{3}.framework/{1}.{2}.{3}".format(
-            addon_path,
-            project_name,
-            env["platform"],
-            debug_or_release,
-        ),
-        source=sources,
-    )
-else:
-    library = env.SharedLibrary(
-        "{}/bin/lib{}.{}.{}.{}{}".format(
-            addon_path,
-            project_name,
-            env["platform"],
-            debug_or_release,
-            env["arch"],
-            env["SHLIBSUFFIX"],
-        ),
-        source=sources,
-    )
+RES_LIBS = os.path.join(ROOT, "project", "addons", "JSBSim", "bin")
+ANDROID_LIBS = RES_LIBS
 
-jsbsim_source = os.path.join(jsbsim_build_dir, "libJSBSim.so.1")
+sources = glob(os.path.join(EXT_SRC, "*.cpp"))
+env.Append(CPPPATH=[EXT_SRC, os.path.join(JSBSIM_ROOT, "src")])
+env.Append(LIBPATH=[JSBSIM_BUILD])
+env.Append(LIBS=["JSBSim"])
 
-jsbsim_destination = os.path.join(str(addon_path), "bin")
+if platform == "linux":
+    env.Append(LINKFLAGS=["-Wl,-rpath,'$$ORIGIN'"])
+elif platform == "android":
+    pass
 
-copied_jsbsim = env.Install(jsbsim_destination, jsbsim_source)
+glue_output = os.path.join(
+    RES_LIBS if platform == "linux" else ANDROID_LIBS,
+    f"lib{PROJECT_NAME}.{platform}.{debug_or_release}.{arch}{env['SHLIBSUFFIX']}"
+)
 
-Default(copied_jsbsim)
+library = env.SharedLibrary(glue_output, source=sources)
 
-src2 = [
-    "jsbsim/aircraft",
-    "jsbsim/engine",
-    "jsbsim/systems",
-    "jsbsim/scripts"
-]
+jsbsim_destination = RES_LIBS if platform == "linux" else ANDROID_LIBS
+copied_jsbsim = env.Install(jsbsim_destination, JSBSIM_LIB)
 
-dest = "project/JSBSim_files"
-
+JSBSIM_DATA_DIRS = ["aircraft", "engine", "systems", "scripts"]
+JSBSIM_DEST = os.path.join(ROOT, "project", "JSBSim_files")
 install_targets = []
 
-for src_dir in src2:
-    tgt = env.Install(dest, src_dir)
+for src_dir in JSBSIM_DATA_DIRS:
+    src_path = os.path.join(JSBSIM_ROOT, src_dir)
+    tgt = env.Install(JSBSIM_DEST, src_path)
     install_targets.extend(tgt)
 
-Default(install_targets)
-Default(library)
+Default([library, copied_jsbsim] + install_targets)
