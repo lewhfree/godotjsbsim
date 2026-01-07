@@ -22,3 +22,21 @@ common/physics_ticks_per_second=120
 [rendering]
 
 textures/vram_compression/import_etc2_astc=true
+occlusion_culling/use_occlusion_culling=true
+
+[display]
+
+window/vsync/vsync_mode=0
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/terrain_3d/plugin.cfg")
+
+[filesystem]
+
+import/blender/enabled=false
+
+[layer_names]
+
+3d_physics/layer_1="Environment"
+3d_physics/layer_2="Player"

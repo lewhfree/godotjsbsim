@@ -18,7 +18,7 @@ func _ready() -> void:
 	
 	#load example files. Starts the cessna 2000 ft in the air with 90 kts i think
 	JSBSim.LoadModel("c172p", true)
-	JSBSim.LoadInitFile("reset01", true)
+	JSBSim.LoadInitFile("reset00", true)
 	
 	#Get sim setup after loaded init conditions
 	JSBSim.RunIC()
@@ -34,10 +34,15 @@ func _process(_delta: float):
 	$Airplane.rotation = rot
 	
 	var pos = $Airplane.position
-	pos = Vector3(pos.x, JSBSim.GetPropertyValue("position/geod-alt-ft") * 0.3048, pos.x)
+	pos = Vector3(pos.x, JSBSim.GetPropertyValue("position/geod-alt-ft"), pos.x)
 	$Airplane.position = pos
-	
-	LabelNode.text = "Height above sea level: " + str(JSBSim.GetPropertyValue("position/h-sl-ft"))
+	LabelNode.text = "Lat (deg): " + str(JSBSim.GetPropertyValue("position/lat-gc-deg"))
+	LabelNode.text += "\n"
+	LabelNode.text += "Long (deg): " + str(JSBSim.GetPropertyValue("position/long-gc-deg"))
+	#position/lat-gc-deg (RW)
+	#position/long-gc-deg (RW)
+
+	LabelNode.text += "\nHeight above sea level: " + str(JSBSim.GetPropertyValue("position/h-sl-ft"))
 	LabelNode.text += "\nPitch in deg " + str(57.2958 * JSBSim.GetPropertyValue("attitude/pitch-rad"))
 	LabelNode.text += "\nCalibrated Airspeed knots: " + str(JSBSim.GetPropertyValue("velocities/vc-kts"))
 	LabelNode.text += "\nPilot GForce(?): " + str(JSBSim.GetPropertyValue("accelerations/n-pilot-z-norm"))
