@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://c7u64tpv6byvb"]
+[gd_scene load_steps=12 format=3 uid="uid://c7u64tpv6byvb"]
 
 [ext_resource type="Script" uid="uid://bu0qr7l56tu14" path="res://game/world.gd" id="1_tvmmn"]
 [ext_resource type="PackedScene" uid="uid://c2xuherrowsss" path="res://game/environment.tscn" id="1_vn0wg"]
 [ext_resource type="PackedScene" uid="uid://bufs6n2mhy30w" path="res://game/airplane.tscn" id="2_aseec"]
+[ext_resource type="Script" uid="uid://btad34ja5f7sk" path="res://game/inputMan.gd" id="4_4xpgs"]
 
 [sub_resource type="Gradient" id="Gradient_tvmmn"]
 offsets = PackedFloat32Array(0.2, 1)
@@ -102,8 +103,5 @@ offset_top = 1.0
 offset_right = 484.0
 offset_bottom = 24.0
 
-[node name="fps2" type="Label" parent="."]
-offset_left = 441.0
-offset_top = 53.0
-offset_right = 481.0
-offset_bottom = 76.0
+[node name="inputManager" type="Node" parent="."]
+script = ExtResource("4_4xpgs")

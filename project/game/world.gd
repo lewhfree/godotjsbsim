@@ -4,7 +4,7 @@ extends Node
 @onready var LabelNode: Label = $Label
 @onready var Airplane: Node3D = $Airplane
 @onready var fps: Label = $fps
-@onready var fps2: Label = $fps2
+@onready var inputManager: Node = $inputManager
 
 func _ready() -> void:
 	PhysicsServer3D.set_active(false)
@@ -27,16 +27,22 @@ func _ready() -> void:
 	
 	#Get sim setup after loaded init conditions
 	JSBSim.RunIC()
-	JSBSim.SetPropertyValue("fcs/throttle-cmd-norm", 1.0)
-	JSBSim.SetPropertyValue("fcs/mixture-cmd-norm", 1.0)
+	JSBSim.SetPropertyValue("fcs/throttle-cmd-norm", 0.9)
+	JSBSim.SetPropertyValue("fcs/mixture-cmd-norm", 0.8)
 	JSBSim.SetPropertyValue("propulsion/magneto_cmd", 3)
 	JSBSim.SetPropertyValue("propulsion/starter_cmd", 1)
 
 func _physics_process(_delta: float) -> void:
-	fps2.text = "physics FPS: " + str(1.0 / _delta)
 	JSBSim.Run()
 
 func _process(_delta: float):
+	var axes: Vector4 = inputManager.pull_axes();
+	#elevator, aileron, rudder, throttle.
+	JSBSim.SetPropertyValue("fcs/elevator-cmd-norm", axes.x)
+	JSBSim.SetPropertyValue("fcs/aileron-cmd-norm", axes.y)
+	JSBSim.SetPropertyValue("fcs/throttle-cmd-norm", axes.w)
+
+	
 	var lat = JSBSim.GetPropertyValue("position/lat-geod-rad")
 	var long = JSBSim.GetPropertyValue("position/long-gc-rad")
 	var alt = JSBSim.GetPropertyValue("position/geod-alt-ft") * 0.3048
@@ -57,3 +63,6 @@ func _process(_delta: float):
 	LabelNode.text += "\nPitch in deg " + str(57.2958 * JSBSim.GetPropertyValue("attitude/pitch-rad"))
 	LabelNode.text += "\nCalibrated Airspeed knots: " + str(JSBSim.GetPropertyValue("velocities/vc-kts"))
 	LabelNode.text += "\nPilot GForce(?): " + str(JSBSim.GetPropertyValue("accelerations/n-pilot-z-norm"))
+	LabelNode.text += "\nElevator normalized: " + str(JSBSim.GetPropertyValue("fcs/elevator-cmd-norm"))
+	LabelNode.text += "\nAileron normalized: " + str(JSBSim.GetPropertyValue("fcs/aileron-cmd-norm"))
+	LabelNode.text += "\nThrottle normalized: " + str(JSBSim.GetPropertyValue("fcs/throttle-cmd-norm"))
